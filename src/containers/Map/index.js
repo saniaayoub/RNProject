@@ -29,7 +29,7 @@ const Map = () => {
   const [marginBottom, setMarginBottom] = useState(1);
 
   useEffect(() => {
-    Geocoder.init('AIzaSyDpjC5dmFxhdUHi24y0ZH6PGD_NhOLFCMA');
+    Geocoder.init('AIzaSyCFXqNsbbXh7LEnJkWaxN8N6u6AQ4_GAiY');
     getLocation();
   }, []);
 
@@ -40,6 +40,7 @@ const Map = () => {
     })
       .then(location => {
         setLocation(location);
+        console.log(location);
         setRegion({
           latitude: location.latitude,
           longitude: location.longitude,
@@ -65,7 +66,7 @@ const Map = () => {
   };
 
   const getPysicalAddress = location => {
-    Geocoder.init('AIzaSyDpjC5dmFxhdUHi24y0ZH6PGD_NhOLFCMA');
+    Geocoder.init('AIzaSyCFXqNsbbXh7LEnJkWaxN8N6u6AQ4_GAiY');
     setTimeout(() => {
       Geocoder.from(location.description)
         .then(json => {
@@ -142,7 +143,7 @@ const Map = () => {
                 },
               }}
               query={{
-                key: 'AIzaSyDpjC5dmFxhdUHi24y0ZH6PGD_NhOLFCMA',
+                key: 'AIzaSyCFXqNsbbXh7LEnJkWaxN8N6u6AQ4_GAiY',
                 language: 'en',
               }}
               currentLocation={true}
