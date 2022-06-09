@@ -6,6 +6,7 @@ import {
   Weather,
   Spotify,
   Map,
+  Notifications,
 } from '../../containers';
 
 export const HomeStack = [
@@ -43,5 +44,10 @@ export const HomeStack = [
     name: 'Map',
     component: Map,
     key: 'Map',
+  },
+  {
+    name: 'Notifications',
+    component: Notifications,
+    key: 'Notifications',
   },
 ];

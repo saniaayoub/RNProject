@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, StatusBar} from 'react-native';
 import {Colors} from './src/config';
 import Route from './src';
@@ -7,6 +7,8 @@ import RNBootSplash from 'react-native-bootsplash';
 // import { ToastComponent } from './src/components';
 
 const App = () => {
+  const [color, setColor] = useState('black');
+
   useEffect(() => {
     const init = async () => {
       // …do multiple sync or async tasks
@@ -15,11 +17,11 @@ const App = () => {
     init().finally(async () => {
       setTimeout(() => {
         RNBootSplash.hide({fade: true});
-      }, 1000);
+      }, 100);
     });
   }, []);
   return (
-    <View style={{flex: 1, backgroundColor: Colors.Secondary}}>
+    <View style={{flex: 1, backgroundColor: color}}>
       <StatusBar backgroundColor={Colors.Primary} barStyle="light-content" />
       {/* <Loader /> */}
       <Route />

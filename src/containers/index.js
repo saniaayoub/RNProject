@@ -9,6 +9,7 @@ import ForgotPass from './ForgotPass';
 import Weather from './Weather';
 import Spotify from './Spotify';
 import Map from './Map';
+import Notifications from './Notifications';
 export {
   Splash,
   SignIn,
@@ -21,4 +22,5 @@ export {
   Weather,
   Spotify,
   Map,
+  Notifications,
 };

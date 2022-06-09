@@ -3,7 +3,6 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {AuthStack} from './AuthStack';
 import {HomeStack} from './HomeStack';
 import {useSelector} from 'react-redux';
-
 export const MainStackNavigator = () => {
   const MainStackNavigator = createNativeStackNavigator();
   const AppStacks = [...AuthStack, ...HomeStack];

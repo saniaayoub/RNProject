@@ -12,7 +12,10 @@ import {Colors, Constants} from './src/config';
 import {Provider} from 'react-redux';
 import Store from './src/store';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import PushNotification from 'react-native-push-notification';
 import auth from '@react-native-firebase/auth';
+
+import NavigationService from './src/config/navigationService';
 
 class AppView extends Component {
   state = {
@@ -20,7 +23,15 @@ class AppView extends Component {
   };
   componentDidMount() {
     // To add temprory user to be logged in with same credintials
-    AsyncStorage.setItem('TempUser', JSON.stringify(Constants.TempUser));
+    PushNotification.configure({
+      onNotification: function (notification) {
+        console.log('NOTIFICATION:', notification);
+        NavigationService.navigate('Weather');
+      },
+      requestPermissions: Platform.OS === 'ios',
+    });
+
+    // AsyncStorage.setItem('TempUser', JSON.stringify(Constants.TempUser));
   }
 
   render() {

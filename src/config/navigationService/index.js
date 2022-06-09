@@ -38,4 +38,5 @@ export default {
   replace,
   goBack,
   reset_0,
+  _navigator,
 };
