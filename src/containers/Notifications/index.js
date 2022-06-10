@@ -1,44 +1,42 @@
 import React, {Component, useEffect, useState} from 'react';
 import {View, ScrollView, Text, ActivityIndicator} from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
+import messaging from '@react-native-firebase/messaging';
 import {Button, Forminput, Header} from '../../components';
 import {Metrix, NavigationService, Utils} from '../../config';
 import {AppAction} from '../../store/actions';
 import styles from './styles';
 import Icon from 'react-native-vector-icons/FontAwesome5';
 import PushNotification from 'react-native-push-notification';
+import {
+  requestUserPermission,
+  notificationListener,
+} from '../../config/notificationService';
 const Notifications = () => {
   const dispatch = useDispatch();
-  const [city, setCity] = useState('Karachi');
-  const [validCity, setValidCity] = useState(false);
-  const [cityErrorMsg, setErrorMsg] = useState('');
+  const [message, setmessage] = useState('');
+  const [validmessage, setValidmessage] = useState(false);
+  const [messageErrorMsg, setErrorMsg] = useState('');
 
   useEffect(() => {
-    dispatch(AppAction.WeatherCheck({city}));
-    createChannel();
+    requestUserPermission();
+    notificationListener();
   }, []);
 
-  const weatherInfo = useSelector(state => state.AppReducer.weatherData);
-  const loader = useSelector(state => state.AppReducer.loader);
-  const checkWeather = () => {
-    if (!city) setErrorMsg('Please Enter city.');
-    else if (!validCity) setErrorMsg('Please enter valid city');
-    else {
-      dispatch(AppAction.WeatherCheck({city}));
-    }
-  };
+  const sendMessage = () => {};
   const createChannel = () => {
     PushNotification.createChannel({
       channelId: 'test-id', // (required)
       channelName: 'My channel', // (required)
     });
   };
+
   return (
     <View style={styles.container}>
       <Header.Standard
         leftIconName={'arrow-left'}
         onPressLeft={NavigationService.goBack}
-        Heading={'Weather'}
+        Heading={'Messenger'}
       />
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
@@ -48,25 +46,19 @@ const Notifications = () => {
         <View style={styles.content}>
           <View style={{marginBottom: Metrix.VerticalSize(20)}}>
             <Forminput.TextField
-              placeholder="Enter City"
+              placeholder="Write Text"
               returnKeyType="done"
-              onChangeText={city => {
-                let validate = Utils.isFullNameValid(city);
-                setCity(city);
-                setValidCity(validate);
-                setErrorMsg('');
+              onChangeText={message => {
+                setmessage(message);
               }}
-              value={city}
+              value={message}
               blurOnSubmit={false}
-              errMsg={cityErrorMsg}
+              errMsg={messageErrorMsg}
               containerStyle={{marginTop: Metrix.VerticalSize(25)}}
             />
           </View>
-          <Button.Standard
-            text="Check Weather"
-            onPress={() => checkWeather()}
-          />
-          {loader ? (
+          <Button.Standard text="Send" onPress={() => sendMessage()} />
+          {/* {loader ? (
             <ActivityIndicator />
           ) : (
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
@@ -85,7 +77,7 @@ const Notifications = () => {
               />
               <Text style={{color: 'yellow'}}>{weatherInfo.main?.temp}</Text>
             </View>
-          )}
+          )} */}
         </View>
       </ScrollView>
     </View>

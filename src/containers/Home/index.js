@@ -27,7 +27,7 @@ class Home extends Component {
   unsubNavigationEvent = () => {};
 
   componentDidMount() {
-    this.createChannel();
+    // this.createChannel();
     this.props.GetPosts();
 
     this.unsubNavigationEvent = this.props.navigation.addListener(
@@ -37,35 +37,35 @@ class Home extends Component {
       },
     );
   }
-  createChannel = () => {
-    PushNotification.createChannel({
-      channelId: 'test-id', // (required)
-      channelName: 'My channel', // (required)
-    });
-  };
+  // createChannel = () => {
+  //   PushNotification.createChannel({
+  //     channelId: 'test-id', // (required)
+  //     channelName: 'My channel', // (required)
+  //   });
+  // };
   componentWillUnmount() {
     this.unsubNavigationEvent();
   }
-  handleNotification = () => {
-    this.setState({
-      id: this.state.id + 1,
-    });
-    // PushNotification.cancelAllLocalNotifications();
-    PushNotification.localNotification({
-      channelId: 'test-id',
-      title: 'You clicked on Button',
-      message: 'Karachi',
-      bigText: 'Good Morning! Have a nice day',
-      color: 'red',
-      id: this.state.id,
-    });
-    PushNotification.localNotificationSchedule({
-      channelId: 'test-id',
-      title: 'You clicked on Button',
-      message: 'Lahore',
-      date: new Date(Date.now() + 5 * 2000),
-    });
-  };
+  // handleNotification = () => {
+  //   this.setState({
+  //     id: this.state.id + 1,
+  //   });
+  //   // PushNotification.cancelAllLocalNotifications();
+  //   PushNotification.localNotification({
+  //     channelId: 'test-id',
+  //     title: 'You clicked on Button',
+  //     message: 'Karachi',
+  //     bigText: 'Good Morning! Have a nice day',
+  //     color: 'red',
+  //     id: this.state.id,
+  //   });
+  //   PushNotification.localNotificationSchedule({
+  //     channelId: 'test-id',
+  //     title: 'You clicked on Button',
+  //     message: 'Lahore',
+  //     date: new Date(Date.now() + 5 * 2000),
+  //   });
+  // };
   render() {
     return (
       <View style={styles.container}>

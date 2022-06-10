@@ -1,15 +1,18 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {NavigationService} from './config';
 import {MainStackNavigator} from './config/navigationConfig';
 
-const Navigation = () => {
+const Navigation = ({initialRoute}) => {
+  useEffect(() => {
+    console.log(initialRoute);
+  });
   return (
     <NavigationContainer
       ref={navigatorRef => {
         NavigationService.setTopLevelNavigator(navigatorRef);
       }}>
-      <MainStackNavigator />
+      <MainStackNavigator initialRoute={initialRoute} />
     </NavigationContainer>
   );
 };

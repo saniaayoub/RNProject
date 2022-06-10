@@ -8,12 +8,13 @@ import RNBootSplash from 'react-native-bootsplash';
 
 const App = () => {
   const [color, setColor] = useState('black');
+  const [initialRoute, setInitialRoute] = useState('Home');
 
   useEffect(() => {
     const init = async () => {
       // …do multiple sync or async tasks
     };
-
+    setInitialRoute('Weather');
     init().finally(async () => {
       setTimeout(() => {
         RNBootSplash.hide({fade: true});
@@ -24,7 +25,7 @@ const App = () => {
     <View style={{flex: 1, backgroundColor: color}}>
       <StatusBar backgroundColor={Colors.Primary} barStyle="light-content" />
       {/* <Loader /> */}
-      <Route />
+      <Route initialRoute={initialRoute} />
       {/* <ToastComponent/> */}
     </View>
   );

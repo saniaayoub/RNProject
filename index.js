@@ -14,8 +14,8 @@ import Store from './src/store';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import PushNotification from 'react-native-push-notification';
 import auth from '@react-native-firebase/auth';
-
-import NavigationService from './src/config/navigationService';
+import messaging from '@react-native-firebase/messaging';
+import {setBackgroundListener} from './src/config/notificationService';
 
 class AppView extends Component {
   state = {
@@ -26,12 +26,11 @@ class AppView extends Component {
     PushNotification.configure({
       onNotification: function (notification) {
         console.log('NOTIFICATION:', notification);
-        NavigationService.navigate('Weather');
       },
       requestPermissions: Platform.OS === 'ios',
     });
-
     // AsyncStorage.setItem('TempUser', JSON.stringify(Constants.TempUser));
+    setBackgroundListener();
   }
 
   render() {
